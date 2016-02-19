@@ -1,0 +1,20 @@
+{
+  "name": "cssubmit",
+  "version": "1.0.0",
+  "description": "A tool to reduce redudancy for instructors of elementary programming courses",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AbdulPlusPlus/CSSubmit.git"
+  },
+  "author": "Abdul Kadir, Justin Gulutz, Winston Cheong, Phuc Tran, Amandeep Singh, Darren Martin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AbdulPlusPlus/CSSubmit/issues"
+  },
+  "homepage": "https://github.com/AbdulPlusPlus/CSSubmit#readme"
+}
