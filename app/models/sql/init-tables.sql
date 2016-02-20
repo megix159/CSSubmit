@@ -47,8 +47,8 @@ CREATE  TABLE IF NOT EXISTS `File` (
   `file_name` VARCHAR(45) NOT NULL ,
   `owner_id` INT NOT NULL ,
   PRIMARY KEY (`file_id`) ,
-  INDEX `user_id` (`owner_id` ASC) ,
-  CONSTRAINT `user_id`
+  INDEX `fk_owner` (`owner_id` ASC) ,
+  CONSTRAINT `fk_owner`
     FOREIGN KEY (`owner_id` )
     REFERENCES `User` (`user_id` )
     ON DELETE NO ACTION
@@ -64,8 +64,8 @@ CREATE  TABLE IF NOT EXISTS `Course` (
   `name` VARCHAR(45) NOT NULL ,
   `instructor_id` INT NOT NULL ,
   PRIMARY KEY (`course_id`) ,
-  INDEX `user_id` (`instructor_id` ASC) ,
-  CONSTRAINT `user_id`
+  INDEX `fk_courseinstructor` (`instructor_id` ASC) ,
+  CONSTRAINT `fk_courseinstructor`
     FOREIGN KEY (`instructor_id` )
     REFERENCES `User` (`user_id` )
     ON DELETE NO ACTION
@@ -106,14 +106,14 @@ CREATE  TABLE IF NOT EXISTS `Submission` (
   `file` INT NOT NULL ,
   `assignment` INT NOT NULL ,
   PRIMARY KEY (`submission_id`) ,
-  INDEX `file_id` (`file` ASC) ,
-  INDEX `assignment_id` (`assignment` ASC) ,
-  CONSTRAINT `file_id`
+  INDEX `fk_submissionfile` (`file` ASC) ,
+  INDEX `fk_submission_assignment` (`assignment` ASC) ,
+  CONSTRAINT `fk_submissionfile`
     FOREIGN KEY (`file` )
     REFERENCES `File` (`file_id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `assignment_id`
+  CONSTRAINT `fk_submission_assignment`
     FOREIGN KEY (`assignment` )
     REFERENCES `Assignment` (`assignment_id` )
     ON DELETE NO ACTION
@@ -128,15 +128,15 @@ CREATE  TABLE IF NOT EXISTS `Result` (
   `result_id` INT NOT NULL AUTO_INCREMENT ,
   `submission` INT NOT NULL ,
   `file` INT NOT NULL ,
-  INDEX `submission_id` (`submission` ASC) ,
-  INDEX `file_id` (`file` ASC) ,
+  INDEX `fk_submission` (`submission` ASC) ,
+  INDEX `fk_resultfile` (`file` ASC) ,
   PRIMARY KEY (`result_id`) ,
-  CONSTRAINT `submission_id`
+  CONSTRAINT `fk_submission`
     FOREIGN KEY (`submission` )
     REFERENCES `Submission` (`submission_id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `file_id`
+  CONSTRAINT `fk_resultfile`
     FOREIGN KEY (`file` )
     REFERENCES `File` (`file_id` )
     ON DELETE NO ACTION
@@ -152,9 +152,9 @@ CREATE  TABLE IF NOT EXISTS `Test` (
   `file` INT NOT NULL ,
   `assignment` INT NOT NULL ,
   PRIMARY KEY (`testfile_id`) ,
-  INDEX `file_id` (`file` ASC) ,
+  INDEX `fk_testfile` (`file` ASC) ,
   INDEX `assignment_id` (`assignment` ASC) ,
-  CONSTRAINT `file_id`
+  CONSTRAINT `fk_testfile`
     FOREIGN KEY (`file` )
     REFERENCES `File` (`file_id` )
     ON DELETE NO ACTION
@@ -174,14 +174,14 @@ CREATE  TABLE IF NOT EXISTS `Course_Student` (
   `student_id` INT NOT NULL ,
   `course_id` INT NOT NULL ,
   PRIMARY KEY (`student_id`, `course_id`) ,
-  INDEX `course_id` (`course_id` ASC) ,
-  INDEX `user_id` (`student_id` ASC) ,
-  CONSTRAINT `course_id`
+  INDEX `fk_course` (`course_id` ASC) ,
+  INDEX `fk_course_student` (`student_id` ASC) ,
+  CONSTRAINT `fk_course`
     FOREIGN KEY (`course_id` )
     REFERENCES `Course` (`course_id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `user_id`
+  CONSTRAINT `fk_course_student`
     FOREIGN KEY (`student_id` )
     REFERENCES `User` (`user_id` )
     ON DELETE NO ACTION
@@ -193,4 +193,3 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-

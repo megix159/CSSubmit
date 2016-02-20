@@ -1,7 +1,7 @@
 {
   "name": "cssubmit",
   "version": "1.0.0",
-  "description": "A tool to reduce redudancy for instructors of elementary programming courses",
+  "description": "A tool to reduce redundancy for instructors of elementary programming courses",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/AbdulPlusPlus/CSSubmit/issues"
   },
-  "homepage": "https://github.com/AbdulPlusPlus/CSSubmit#readme"
+  "homepage": "https://github.com/AbdulPlusPlus/CSSubmit#readme",
+  "dependencies": {
+    "express": "^4.13.4",
+    "mysql": "^2.10.2"
+  }
 }
