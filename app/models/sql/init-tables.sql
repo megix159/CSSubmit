@@ -7,7 +7,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 -- Table `Institution`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `Institution` (
-  `institution_id` INT NOT NULL ,
+  `institution_id` INT NOT NULL UNIQUE ,
   `name` VARCHAR(20) NOT NULL ,
   `street_address` VARCHAR(45) NOT NULL ,
   `city` VARCHAR(22) NOT NULL ,
@@ -22,7 +22,7 @@ ENGINE = InnoDB;
 -- Table `User`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `User` (
-  `user_id` INT NOT NULL ,
+  `user_id` INT NOT NULL UNIQUE ,
   `type` ENUM('admin','instructor','student') NOT NULL ,
   `first_name` VARCHAR(45) NOT NULL ,
   `last_name` VARCHAR(45) NOT NULL ,
@@ -43,7 +43,7 @@ ENGINE = InnoDB;
 -- Table `File`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `File` (
-  `file_id` INT NOT NULL AUTO_INCREMENT ,
+  `file_id` INT NOT NULL UNIQUE ,
   `file_name` VARCHAR(45) NOT NULL ,
   `owner_id` INT NOT NULL ,
   PRIMARY KEY (`file_id`) ,
@@ -60,7 +60,7 @@ ENGINE = InnoDB;
 -- Table `Course`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `Course` (
-  `course_id` INT NOT NULL ,
+  `course_id` INT NOT NULL UNIQUE ,
   `name` VARCHAR(45) NOT NULL ,
   `instructor_id` INT NOT NULL ,
   PRIMARY KEY (`course_id`) ,
@@ -77,7 +77,7 @@ ENGINE = InnoDB;
 -- Table `Assignment`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `Assignment` (
-  `assignment_id` INT NOT NULL AUTO_INCREMENT ,
+  `assignment_id` INT NOT NULL AUTO_INCREMENT UNIQUE ,
   `course_id` INT NOT NULL ,
   `name` VARCHAR(45) NOT NULL ,
   `due_date` TIMESTAMP NULL ,
@@ -102,7 +102,7 @@ ENGINE = InnoDB;
 -- Table `Submission`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `Submission` (
-  `submission_id` INT NOT NULL AUTO_INCREMENT ,
+  `submission_id` INT NOT NULL AUTO_INCREMENT UNIQUE ,
   `file` INT NOT NULL ,
   `assignment` INT NOT NULL ,
   PRIMARY KEY (`submission_id`) ,
@@ -125,7 +125,7 @@ ENGINE = InnoDB;
 -- Table `Result`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `Result` (
-  `result_id` INT NOT NULL AUTO_INCREMENT ,
+  `result_id` INT NOT NULL AUTO_INCREMENT UNIQUE ,
   `submission` INT NOT NULL ,
   `file` INT NOT NULL ,
   INDEX `fk_submission` (`submission` ASC) ,
@@ -148,7 +148,7 @@ ENGINE = InnoDB;
 -- Table `Test`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `Test` (
-  `testfile_id` INT NOT NULL AUTO_INCREMENT ,
+  `testfile_id` INT NOT NULL AUTO_INCREMENT UNIQUE ,
   `file` INT NOT NULL ,
   `assignment` INT NOT NULL ,
   PRIMARY KEY (`testfile_id`) ,
